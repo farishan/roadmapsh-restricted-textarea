@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restricted Textarea Demo</title>
+</head>
+<body>
+  <textarea id="textarea"></textarea>
+  <span id="lengthDisplay">0</span>
+
+  <script>
+    const $textarea = document.querySelector('#textarea')
+    const $lengthDisplay = document.querySelector('#lengthDisplay')
+
+    const MAX_LENGTH = 250
+
+    $textarea.addEventListener('keydown', (e) => {
+      if ($textarea.value.length > MAX_LENGTH) e.preventDefault();
+
+      render()
+    })
+
+    function render() {
+      if ($textarea.value.length >= MAX_LENGTH) {
+        $textarea.style.border = '1px solid red'
+        $textarea.value = $textarea.value.slice(0, MAX_LENGTH)
+      } else {
+        $textarea.style.border = '1px solid black'
+      }
+
+      $lengthDisplay.innerText = $textarea.value.length
+    }
+
+    render()
+  </script>
+</body>
+</html>
